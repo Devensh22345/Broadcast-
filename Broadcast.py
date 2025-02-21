@@ -3,12 +3,12 @@ from pymongo import MongoClient
 import os
 
 # Telegram Bot Token
-TOKEN = os.getenv("6963634345:AAEv-XbYCLoBmq6MU1xf5KGPI0y0jdgLv1c")
-OWNER_ID = int(os.getenv("6872968794"))  # Replace with your Telegram user ID
+TOKEN = os.getenv("BOT_TOKEN")
+OWNER_ID = int(os.getenv("OWNER_ID"))  # Replace with your Telegram user ID
 bot = telebot.TeleBot(TOKEN)
 
 # MongoDB Connection
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://Chatbot:Chatbot@cluster0.xtdto.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
 db = client["telegram_bot"]
 users_collection = db["users"]
@@ -51,6 +51,7 @@ if __name__ == "__main__":
     import logging
     import time
     from flask import Flask
+    from threading import Thread
 
     logging.basicConfig(level=logging.INFO)
     app = Flask(__name__)
@@ -59,7 +60,6 @@ if __name__ == "__main__":
     def index():
         return "Bot is running"
     
-    from threading import Thread
     def start_bot():
         while True:
             try:
@@ -70,5 +70,6 @@ if __name__ == "__main__":
     
     Thread(target=start_bot).start()
 
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    if __name__ == "__main__":
+        port = int(os.environ.get("PORT", 5000))
+        app.run(host="0.0.0.0", port=port)
