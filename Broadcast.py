@@ -73,3 +73,11 @@ if __name__ == "__main__":
     if __name__ == "__main__":
         port = int(os.environ.get("PORT", 5000))
         app.run(host="0.0.0.0", port=port)
+
+# Heroku Deployment Config
+# Create a requirements.txt file
+# pip freeze > requirements.txt
+# Create a Procfile with the following content:
+# web: python bot.py
+# Set up the buildpack:
+# heroku buildpacks:set heroku/python
